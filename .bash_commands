@@ -1,0 +1,262 @@
+#!/bin/bash
+#                                  ┌─────────────────────────────────────────┐
+#                                  │        Bash Commands (PERSONAL)         │
+#                                  ├─────────────────────────────────────────┤
+#                                  │       Needs uploading to Github         │
+#                                  └─────────────────────────────────────────┘
+# ┌─────────────────────────┐
+# │         Aliases         │
+# └─────────────────────────┘
+    alias o="open ."
+    # Serve live IP
+    export LOCAL_IP='ipconfig getifaddr en0'
+    alias serve="browser-sync start -s -f . --host $LOCAL_IP --port 9000"
+    # Git Functions/Aliases
+    alias gita="git add -i"
+    alias lg="lazygit"
+    # Edit Functions/Aliases
+    alias vim="nvim -v"
+    alias cvim="nvim ./*.cs"            
+    alias nn="nvim"
+    # Other Aliases
+    alias rex="open 'https://rextester.com/'"
+
+    #DOTNET Aliases
+    # .Net compile/run/test
+    alias .b="dotnet build *.csproj"
+    alias .r="dotnet run"
+    alias .t="dotnet test --verbosity quiet --nologo"
+
+    #Location Aliases
+    alias plroot="cd /Users/christopherdehner/Library/Python/2.7/lib/python/site-packages/powerline"
+    alias c="cd /Users/christopherdehner/Code/projects/treehouse/c# && n"
+    alias proj="cd /Users/christopherdehner/Code/projects && n"
+    alias poke="cd /Users/christopherdehner/Code/projects/dotnet/pokemon-cli && n"
+    alias dld="cd ~/Downloads && n"
+    alias vs="cd ~/Projects && n"
+    alias r='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+
+#┌─────────────────────────┐
+#│        Functions        │
+#└─────────────────────────┘
+    # Clear with newline
+    function clr {
+        clear
+        echo
+    }
+
+    # Print terminal navigation instructions
+    function nav {
+        echo "MOVE BETWEEN WORDS: Alt + ← + →";
+        echo "LINE BEGINNING (CMD+E) / END (CMD+A)";
+        echo "CLEAR AT CURSOR BEFORE (CTRL+U) / AFTER (CTRL+K)";
+        echo "DELETE WORD BEFORE CURSOR (CTRL+W)";
+        echo "SWAP WORDS BEFORE CURSOR (CTRL+T)";
+        echo "MOVE CURSOR FWD (CTRL+F) / BACKWARD (CTRL+B)";
+        echo "BACKSPACE (CTRL+H)";
+    }
+
+    # Source shortcut
+    sn () {
+        source ~/.bash_profile
+        echo "Loaded updated .bash_profile"
+    }
+
+    # Git commit shortcut
+    commit () {
+        echo -n "Enter commit message: "
+        read MESSAGE
+        git commit -m "$MESSAGE"
+    }
+
+    # Update wanikani wallpapers
+    wkupdate () {
+        cd /Users/christopherdehner/Documents/japanese-study/wk-wallpaper/general
+        ./wpupdate.command
+        wait
+        cd /Users/christopherdehner/Documents/japanese-study/wk-wallpaper/jlpt
+        ./wpupdate.command
+        wait
+        cd /Users/christopherdehner/Documents/japanese-study/wk-wallpaper/levels
+        ./wpupdate.command
+    }
+
+    # Compare directory contents
+    compareDir () {
+        echo -n "Enter project name: "
+        read PROJECT
+        echo -n "Enter source directory: "
+        read SOURCE
+        echo -n "Enter name for source: "
+        read SOURCENAME
+        SOURCEFILEDIR=~/Desktop/$SOURCENAME.txt
+        cd $SOURCE
+        tree --charset=ascii | tee ~/Desktop/$SOURCENAME.txt
+        wait
+        echo -n "Enter clone directory: "
+        read CLONE
+        echo -n "Enter name for source: "
+        read CLONENAME
+        CLONEFILEDIR=~/Desktop/$CLONENAME.txt
+        cd $CLONE
+        tree --charset=ascii | tee ~/Desktop/$CLONENAME.txt
+        wait
+        SDIFF=~/Desktop/$SOURCENAME-to-$CLONENAME-sdiff.txt
+        sdiff $SOURCEFILEDIR $CLONEFILEDIR | tee $SDIFF
+        wait
+        grep -a ">" $SDIFF
+        grep -a "<" $SDIFF
+    }
+
+    # Prompt for preference files
+    function pref {
+        INPUT=/tmp/menu.sh.$$
+        # Storage file for displaying cal and date command output
+        OUTPUT=/tmp/output.sh.$$
+        # Store return value
+        RETURN=/tmp/returnval.sh.$$
+        # get text editor or fall back to vi_editor
+        vi_editor=${EDITOR-nvim}
+        #trap and delete temp files
+        trap 'rm $OUTPUT; rm $INPUT; rm $RETURN exit' SIGHUP SIGINT SIGTERM
+        #
+        # set infinite loop
+        #
+        while true
+        do
+            #
+            # Purpose - display main menu
+            #
+            dialog --clear \
+                --backtitle "Preference file selection screen" \
+                --title "[ M A I N - M E N U ]" \
+                --menu "You can use the UP/DOWN arrow keys, the first \n letter of the choice as a hot key, or the \n number keys 1-9 to choose an option. \n Choose the FILE TO EDIT:" 16 50 4 \
+                c-bash "Edit ~/.bash_commands" \
+                p-bash "Edit ~/.bash_profile" \
+                rc-bash "Edit ~/.bashrc" \
+                tmux "Edit ~/.tmux.conf" \
+                zshrc "Edit ~/.zshrc" \
+                Esc "Exit to the shell" 2>"${INPUT}" 3>"${RETURN}"	
+                        escapeseq=$?
+                        menuitem=$(<"${INPUT}")
+            if [ $escapeseq != 1 ] && [ $escapeseq != 255 ]
+            then
+                case $menuitem in
+                    p-bash) 
+                        command nvim ~/.bash_profile; wait;;
+                    c-bash) 
+                        command nvim ~/.bash_commands; wait;;
+                    rc-bash) 
+                        command nvim ~/.bashrc; wait;;
+                    tmux)
+                        command nvim ~/.tmux.conf;;
+                    zshrc) 
+                        command nvim ~/.zshrc; wait;;
+                    Esc) 
+                        break;;	
+                esac
+            fi
+            case $escapeseq in
+                1)
+                    break;;
+                255)
+                    break;;
+            esac
+        done
+        # if temp files found, delete
+        [ -f $OUTPUT ] && rm $OUTPUT
+        [ -f $INPUT ] && rm $INPUT
+        clr
+        sn
+    }
+    function vpref() {
+        INPUT=/tmp/menu.sh.$$
+        # Storage file for displaying cal and date command output
+        OUTPUT=/tmp/output.sh.$$
+        # Store return value
+        RETURN=/tmp/returnval.sh.$$
+        # get text editor or fall back to vi_editor
+        vi_editor=${EDITOR-nvim}
+        #trap and delete temp files
+        trap 'rm $OUTPUT; rm $INPUT; rm $RETURN exit' SIGHUP SIGINT SIGTERM
+        while true
+        do
+            command dialog --clear \
+                --backtitle "Preference file selection screen" \
+                --title "[ M A I N - M E N U ]" \
+                --menu "You can use the UP/DOWN arrow keys, the first \n letter of the choice as a hot key, or the \n number keys 1-9 to choose an option. \n Choose the FILE TO EDIT:" 16 50 4 \
+                init "~/.vim/init.vim" \
+                abbrev "~/.vim/abbrev.vim" \
+                functions "~/.vim/functions.vim" \
+                mapping "~/.vim/mapping.vim" \
+                plugins "~/.vim/plugin-settings.vim" \
+                ftplugins "~/.vim/functions.vim" \
+                all "Edit all" \
+                Esc "Exit to the shell" 2>"${INPUT}" 3>"${RETURN}"	
+                                escapeseq=$?
+                                menuitem=$(<"${INPUT}")
+            if [ $escapeseq != 1 ] && [ $escapeseq != 255 ]
+            then
+                case $menuitem in
+                    init) 
+                        command nvim ~/.vim/init.vim; wait;;
+                    abbrev) 
+                        command nvim ~/.vim/abbrev.vim; wait;;
+                    functions) 
+                        command nvim ~/.vim/functions.vim; wait;;
+                    mapping) 
+                        command nvim ~/.vim/mapping.vim; wait;;
+                    plugins) 
+                        command nvim ~/.vim/plugin-settings.vim; wait;;
+                    ftplugins)
+                        command nvim ~/.vim/ftplugin/cs/cs.vim; wait;;
+                    all)
+                        command nvim ~/.vimrc ~/.vim/*.vim ~/.vim/ftplugin/cs/*.vim
+                esac
+            fi
+            case $escapeseq in
+                1)
+                    break;;
+                255)
+                    break;;
+            esac
+        done
+        clr
+        sn
+        vit
+    }
+    function .init() {
+        echo -n "Enter project name: "
+        read NAME
+        dotnet new sln -o $NAME
+        wait
+        cd $NAME
+        wait
+        dotnet new console -o $NAME
+        wait
+        dotnet sln add ./$NAME/$NAME.csproj
+        wait
+        dotnet new xunit -o $NAME.Tests
+        wait
+        dotnet add ./$NAME.Tests/$NAME.Tests.csproj reference ./$NAME/$NAME.csproj
+        wait
+        dotnet sln add ./$NAME.Tests/$NAME.Tests.csproj
+    }
+    function vit() {
+        dir=$(pwd)
+        cd ~/.vim
+        DIRECTORIES=$(tree -L 2)
+        tree -L 1 ~/.vim/bundle > dir.txt
+        tree -L 1 ~/.vim/colors >> dir.txt
+        tree -L 1 ~/.vim/plugin >> dir.txt
+        tree -L 1 ~/.vim/plugged >> dir.txt
+        tree -L 1 ~/.vim/autoload >> dir.txt
+        rm Brewfile
+        brew bundle dump
+        echo -n "Updates made: "
+        read UPDATES
+        git add .
+        git commit -m "$UPDATES"
+        git push
+        cd $dir
+    }
