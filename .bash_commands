@@ -2,40 +2,8 @@
 #                                  ┌─────────────────────────────────────────┐
 #                                  │        Bash Commands (PERSONAL)         │
 #                                  ├─────────────────────────────────────────┤
-#                                  │       Needs uploading to Github         │
+#                                  │     https://github.com/cyadehn/.vim     │
 #                                  └─────────────────────────────────────────┘
-# ┌─────────────────────────┐
-# │         Aliases         │
-# └─────────────────────────┘
-    alias o="open ."
-    # Serve live IP
-    export LOCAL_IP='ipconfig getifaddr en0'
-    alias serve="browser-sync start -s -f . --host $LOCAL_IP --port 9000"
-    # Git Functions/Aliases
-    alias gita="git add -i"
-    alias lg="lazygit"
-    # Edit Functions/Aliases
-    alias vim="nvim -v"
-    alias cvim="nvim ./*.cs"            
-    alias nn="nvim"
-    # Other Aliases
-    alias rex="open 'https://rextester.com/'"
-
-    #DOTNET Aliases
-    # .Net compile/run/test
-    alias .b="dotnet build *.csproj"
-    alias .r="dotnet run"
-    alias .t="dotnet test --verbosity quiet --nologo"
-
-    #Location Aliases
-    alias plroot="cd /Users/christopherdehner/Library/Python/2.7/lib/python/site-packages/powerline"
-    alias c="cd /Users/christopherdehner/Code/projects/treehouse/c# && n"
-    alias proj="cd /Users/christopherdehner/Code/projects && n"
-    alias poke="cd /Users/christopherdehner/Code/projects/dotnet/pokemon-cli && n"
-    alias dld="cd ~/Downloads && n"
-    alias vs="cd ~/Projects && n"
-    alias r='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
-
 #┌─────────────────────────┐
 #│        Functions        │
 #└─────────────────────────┘
@@ -110,66 +78,8 @@
 
     # Prompt for preference files
     function pref {
-        INPUT=/tmp/menu.sh.$$
-        # Storage file for displaying cal and date command output
-        OUTPUT=/tmp/output.sh.$$
-        # Store return value
-        RETURN=/tmp/returnval.sh.$$
-        # get text editor or fall back to vi_editor
-        vi_editor=${EDITOR-nvim}
-        #trap and delete temp files
-        trap 'rm $OUTPUT; rm $INPUT; rm $RETURN exit' SIGHUP SIGINT SIGTERM
-        #
-        # set infinite loop
-        #
-        while true
-        do
-            #
-            # Purpose - display main menu
-            #
-            dialog --clear \
-                --backtitle "Preference file selection screen" \
-                --title "[ M A I N - M E N U ]" \
-                --menu "You can use the UP/DOWN arrow keys, the first \n letter of the choice as a hot key, or the \n number keys 1-9 to choose an option. \n Choose the FILE TO EDIT:" 16 50 4 \
-                c-bash "Edit ~/.bash_commands" \
-                p-bash "Edit ~/.bash_profile" \
-                rc-bash "Edit ~/.bashrc" \
-                tmux "Edit ~/.tmux.conf" \
-                zshrc "Edit ~/.zshrc" \
-                Esc "Exit to the shell" 2>"${INPUT}" 3>"${RETURN}"	
-                        escapeseq=$?
-                        menuitem=$(<"${INPUT}")
-            if [ $escapeseq != 1 ] && [ $escapeseq != 255 ]
-            then
-                case $menuitem in
-                    p-bash) 
-                        command nvim ~/.bash_profile; wait;;
-                    c-bash) 
-                        command nvim ~/.bash_commands; wait;;
-                    rc-bash) 
-                        command nvim ~/.bashrc; wait;;
-                    tmux)
-                        command nvim ~/.tmux.conf;;
-                    zshrc) 
-                        command nvim ~/.zshrc; wait;;
-                    Esc) 
-                        break;;	
-                esac
-            fi
-            case $escapeseq in
-                1)
-                    break;;
-                255)
-                    break;;
-            esac
-        done
-        # if temp files found, delete
-        [ -f $OUTPUT ] && rm $OUTPUT
-        [ -f $INPUT ] && rm $INPUT
-        clr
-        sn
-    }
-    function vpref() {
+        currentDir=$(pwd)
+        cd ~/.dotfiles
         INPUT=/tmp/menu.sh.$$
         # Storage file for displaying cal and date command output
         OUTPUT=/tmp/output.sh.$$
@@ -183,35 +93,22 @@
         do
             command dialog --clear \
                 --backtitle "Preference file selection screen" \
-                --title "[ M A I N - M E N U ]" \
-                --menu "You can use the UP/DOWN arrow keys, the first \n letter of the choice as a hot key, or the \n number keys 1-9 to choose an option. \n Choose the FILE TO EDIT:" 16 50 4 \
-                init "~/.vim/init.vim" \
-                abbrev "~/.vim/abbrev.vim" \
-                functions "~/.vim/functions.vim" \
-                mapping "~/.vim/mapping.vim" \
-                plugins "~/.vim/plugin-settings.vim" \
-                ftplugins "~/.vim/functions.vim" \
-                all "Edit all" \
-                Esc "Exit to the shell" 2>"${INPUT}" 3>"${RETURN}"	
+                --title "[ M A I N  M E N U ]" \
+                --menu "Choose preference type: " 0 0 0 \
+                BASH-FILES "Edit bash dotfiles" \
+                NVIM "Edit Nvim dotfiles" \
+                ESC "Exit to the shell" 2>"${INPUT}" 3>"${RETURN}"	
                                 escapeseq=$?
                                 menuitem=$(<"${INPUT}")
             if [ $escapeseq != 1 ] && [ $escapeseq != 255 ]
             then
                 case $menuitem in
-                    init) 
-                        command nvim ~/.vim/init.vim; wait;;
-                    abbrev) 
-                        command nvim ~/.vim/abbrev.vim; wait;;
-                    functions) 
-                        command nvim ~/.vim/functions.vim; wait;;
-                    mapping) 
-                        command nvim ~/.vim/mapping.vim; wait;;
-                    plugins) 
-                        command nvim ~/.vim/plugin-settings.vim; wait;;
-                    ftplugins)
-                        command nvim ~/.vim/ftplugin/cs/cs.vim; wait;;
-                    all)
-                        command nvim ~/.vimrc ~/.vim/*.vim ~/.vim/ftplugin/cs/*.vim
+                    BASH-FILES) 
+                        command nvim ~/.dotfiles/bash/.bash*; wait;;
+                    NVIM) 
+                        command nvim ~/.dotfiles/nvim/*.vim; wait;;
+                    ESC) 
+                        break;;
                 esac
             fi
             case $escapeseq in
@@ -221,9 +118,14 @@
                     break;;
             esac
         done
-        clr
+        dialog --yesno "Push updates to Git?" 0 0
+        case $? in
+            0)
+                vit;;
+        esac
         sn
-        vit
+        cd $currentDir
+        clr
     }
     function .init() {
         echo -n "Enter project name: "

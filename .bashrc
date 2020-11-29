@@ -1,4 +1,13 @@
-source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+export PS1="[\[\e[0;34m\]\u\[\e[0m\]@\h]:\[\e[0;32m\]\w\[\e[m\]\\n\\$ "
+
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
+set () {
+	loc=$1
+}
+
+source "$HOME/.dotfiles/nvim/plugged/gruvbox/gruvbox_256palette.sh"
 # Powerline Prompt
 source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh
 
