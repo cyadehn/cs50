@@ -24,7 +24,7 @@
     alias clone='git clone'
     alias lg='git log'
     alias amend='git commit --amend'
-    alias lg="lazygit"
+    alias lg="lazygit; exec bash; source ~/.bash_profile"
 # ┌─────────────────────────┐
 # │         DOTNET          │
 # └─────────────────────────┘
