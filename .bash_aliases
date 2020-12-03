@@ -26,6 +26,7 @@
     alias lg="lazygit"
     alias gil="gh issue list"
     alias gi="gh issue view"
+    alias dfu="dotfileUpdate"
 # ┌─────────────────────────┐
 # │        FRAMEWORKS       │
 # └─────────────────────────┘
@@ -55,4 +56,5 @@
     alias lsl='ls -l'
     alias t='time'
     alias k='kill'
+    alias h='history 300 | less +G'
     
