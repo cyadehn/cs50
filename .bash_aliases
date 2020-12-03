@@ -22,21 +22,23 @@
     alias st="git status"
     alias com='git commit -m'
     alias clone='git clone'
-    alias lg='git log'
     alias amend='git commit --amend'
-    alias lg="lazygit; exec bash; source ~/.bash_profile"
+    alias lg="lazygit"
+    alias gil="gh issue list"
+    alias gi="gh issue view"
 # ┌─────────────────────────┐
-# │         DOTNET          │
+# │        FRAMEWORKS       │
 # └─────────────────────────┘
     alias .b="dotnet build *.csproj"
     alias .r="dotnet run"
     alias .t="dotnet test --verbosity quiet --nologo"
+    alias ,c="clang *.c"
 # ┌─────────────────────────┐
 # │       Directories       │
 # └─────────────────────────┘
     alias plroot="cd /Users/christopherdehner/Library/Python/2.7/lib/python/site-packages/powerline"
     alias proj="cd /Users/christopherdehner/Code/projects && n"
-    alias poke="cd /Users/christopherdehner/Code/projects/dotnet/pokemon-cli && n"
+    alias poke="cd /Users/christopherdehner/Code/projects/dotnet/PokemonCLI && n"
     alias dld="cd ~/Downloads && n"
     alias vs="cd ~/Projects && n"
     alias rc="cd ~/.dotfiles && n"
