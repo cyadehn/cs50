@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// prototype
 void cough(int times);
 
 int main(void)
@@ -14,4 +15,3 @@ void cough(int times)
         printf("cough\n");
     }
 }
-
