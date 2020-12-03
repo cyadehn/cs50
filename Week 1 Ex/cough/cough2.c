@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+void cough(int times);
+
 int main(void)
 {
     cough(19);
