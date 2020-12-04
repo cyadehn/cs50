@@ -1,3 +1,2 @@
-source ~/.bash_commands
-source ~/.bashrc
-source ~/.bash_aliases
+source ~/bash/.bash_commands
+source ~/bash/.bash_aliases
