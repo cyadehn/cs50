@@ -8,27 +8,31 @@ void buildLeftSide(void);
 void buildRightSide(void);
 void printChars(int num, string chars);
 int level;
-int levels;
+int levels = 0;
 
 int main(void)
 {
-    levels = get_pos_int("Please enter the desired number of levels: ");
+    while (levels < 1 || levels > 8)
+    {
+        levels = get_pos_int("Please enter the desired number of levels: ");
+    }
     buildPyramid();
 }
 
 int get_pos_int(string prompt)
 {
     int n = 0;
-    while ( n < 1 )
+    while (n < 1)
     {
         n = get_int("%s", prompt);
     }
     return n;
 }
 
+//for each level, increment the current level and call lower function
 void buildPyramid()
 {
-    for ( int i = 0; i < levels; i++ )
+    for (int i = 0; i < levels; i++)
     {
         level = i + 1;
         buildLevel();
@@ -36,6 +40,7 @@ void buildPyramid()
     level = 0;
 }
 
+// print both sides with a gap between and a newline at the end
 void buildLevel()
 {
     buildLeftSide();
@@ -44,6 +49,7 @@ void buildLevel()
     printf("\n");
 }
 
+// # of spaces = total levels - current level
 void buildLeftSide(void)
 {
     printChars((levels - level), " ");
@@ -53,12 +59,12 @@ void buildLeftSide(void)
 void buildRightSide(void)
 {
     printChars(level, "#");
-    printChars((levels - level), " ");
+    //printChars((levels - level), " ");
 }
 
 void printChars(int num, string chars)
 {
-    for ( int i = 0; i < num; i++ )
+    for (int i = 0; i < num; i++)
     {
         printf("%s", chars);
     }
