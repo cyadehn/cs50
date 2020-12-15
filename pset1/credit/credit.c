@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include <limits.h>
 #include <cs50.h>
-#include <math.h>
 
 void printDigits();
 long long power();
@@ -11,6 +9,7 @@ string getIssuer();
 int getNumOfDigits();
 bool isSingleDigit();
 int getDigitAt();
+long mod();
 
 
 int main(void)
@@ -69,22 +68,22 @@ bool checksumCheck(long cardNum)
         digit = getDigitAt(cardNum, i);
         // multiple if number is odd
         checksumTotal = numIsEven ? checksumTotal + (digit * 2) : checksumTotal + digit;
-        printf("i: %i, digit: %i, checksum: %i\n", i, digit, checksumTotal);
+        /*printf("i: %i, digit: %i, checksum: %i\n", i, digit, checksumTotal);*/
         numIsEven = numIsEven ? false : true;
     }
-    printf("Checksum total: %i\n", checksumTotal);
+    /*printf("Checksum total: %i\n", checksumTotal);*/
     return checksumTotal % 10 == 0 ? true : false;
 }
 
 int getDigitAt(long cardNum, int place)
 {
     int totalDigits = getNumOfDigits(cardNum);
-    int exponent = totalDigits - place;
-    long double divisor = power(10, exponent);
-    long long digit = fmod(cardNum, divisor);
-    printf("%ld modulus divided by %ld = %lld", cardNum, divisor, fmod(cardNum, divisor));
-    /*printf("10 to the power of %i is %lld... the digit is %lld\n", exponent, power(10, exponent), digit);*/
-    /*printf("The digit at position %i in card number %ld is: %lld\n", place, cardNum, digit);*/
+    long upperMod = power(10, (totalDigits - place));
+    long digitBase = cardNum / upperMod;
+    printf("%ld (cardNum) mod %ld (upperMod) = %ld (digitBase)\n", cardNum, upperMod, digitBase);
+    long divisor = power(10, place - 1);
+    int digit = mod(digitBase, divisor);
+    printf("%ld / %ld = %i\n", digitBase, divisor, digit);
     return (int)digit;
 }
 
@@ -137,4 +136,11 @@ long long power(long x, long y)
         pow *= x;
     }
     return pow;
+}
+
+long mod(long x, long y)
+{
+    long ones = x/y;
+    double remainder = (x/y) - ones;
+    return remainder * y;
 }
