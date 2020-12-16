@@ -16,7 +16,7 @@ int main(void)
     {
         input = get_float("Please enter the change owed (ex. '$$.CC'): ");
     }
-    int cents = (input * 100);
+    int cents = ((input * 1000)/10);
     int coinNum = GetCoinNum(cents);
     printf("%i\n", coinNum);
 }
