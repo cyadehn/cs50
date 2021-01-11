@@ -20,7 +20,7 @@ int main(void)
     int score2 = compute_score(word2);
 
     // TODO: Print the winner
-    string message = (score1 > score2) ? "Player 1 wins!" : "Player 2 wins!";
+    string message = (score1 == score2) ? "Tie!" : (score1 > score2) ? "Player 1 wins!" : "Player 2 wins!";
     printf("%s\n", message);
 }
 
@@ -32,9 +32,9 @@ int compute_score(string word)
     for (int i = 0, n = strlen(upper); i < n; i++)
     {
         // check if character is an uppercase character
-        if(upper[i] >= 'A' && upper[i] <= 'Z')
+        if (upper[i] >= 'A' && upper[i] <= 'Z')
         {
-            score += POINTS[upper[i]-65];
+            score += POINTS[upper[i] - 65];
         }
     }
     return score;
