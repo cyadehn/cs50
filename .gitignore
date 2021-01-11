@@ -1,5 +1,7 @@
 .bash_history
-.c9/
+.c9
+.config/
+.npm/
 .cache/
 .viminfo
 .lesshst
