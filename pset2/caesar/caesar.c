@@ -2,8 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 int keyLen = 0;
+int key = 0;
 
 // accept a single command-line argument (non-negative integer)
 int main(int argc, string argv[])
@@ -28,9 +30,10 @@ int main(int argc, string argv[])
         }
     }
     printf("Success\n");
-    printf("%s\n", argv[1]);
-    return 0;
     // TODO: convert key to integer
+    key = atoi(argv[1]);
+    printf("%i\n", key);
+    return 0;
     // TODO: print plaintext prompt to get string from user
     // TODO: iterate over plaintext, do for each character:
         // rotate and print character, if uppercase or lowercase alphabetical char
