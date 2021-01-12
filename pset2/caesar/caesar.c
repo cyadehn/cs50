@@ -1,5 +1,9 @@
 #include <cs50.h>
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int keyLen = 0;
 
 // accept a single command-line argument (non-negative integer)
 int main(int argc, string argv[])
@@ -13,10 +17,19 @@ int main(int argc, string argv[])
     }
     else
     {
-        printf("Success\n");
-        printf("%s\n", argv[1]);
-        return 0;
+        keyLen = strlen(argv[1]);
+        for (int i = 0; i < keyLen; i++)
+        {
+           if (!isdigit(argv[1][i]))
+           {
+                printf("Usage: ./caesar key");
+                return 1;
+           }
+        }
     }
+    printf("Success\n");
+    printf("%s\n", argv[1]);
+    return 0;
     // TODO: convert key to integer
     // TODO: print plaintext prompt to get string from user
     // TODO: iterate over plaintext, do for each character:
