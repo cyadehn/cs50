@@ -13,3 +13,4 @@ libcs50-10.1.1
 class_files/ex
 **/.DS_Store
 .local/
+**/.sqlite_history
