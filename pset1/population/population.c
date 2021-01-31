@@ -22,7 +22,7 @@ int main(void)
     {
         years += 1;
         // Each year, p/3 llamas are born and p/4 llamas die
-        p = p + (p/3) - (p/4);
+        p = p + (p / 3) - (p / 4);
     }
     // DONE: Print number of years
     printf("Years: %i\n", years);
