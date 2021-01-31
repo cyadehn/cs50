@@ -11,17 +11,17 @@ int calculate_cl_index();
 
 int main(void)
 {
-    // TODO: Prompt user for string of text
+    // DONE: Prompt user for string of text
     string text = get_string("Text: ");
-    // TODO: Count number of letters, words, and sentences (ending in . ! ?)
+    // DONE: Count number of letters, words, and sentences (ending in . ! ?)
     int letters = count_letters(text);
     int words = count_words(text);
     int sentences = count_sentences(text);
-    // TODO: Determine grade level (rounded to nearest integer) using the Coleman-Liau formula:
+    // DONE: Determine grade level (rounded to nearest integer) using the Coleman-Liau formula:
     // index = 0.0588 * L - 0.296 * S - 15.8
     // A grade higher than 16 should output "16+", lower than 1 is "Before Grade 1"
     int grade = calculate_cl_index(letters, words, sentences);
-    // TODO: Pround output as "Grade X"
+    // DONE: Pround output as "Grade X"
     if (grade > 16)
     {
         printf("Grade 16+\n");
