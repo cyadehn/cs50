@@ -85,7 +85,7 @@ int calculate_cl_index(int l, int w, int s)
     float letters = (float)l;
     float words = (float)w;
     float sentences = (float)s;
-    int L = round((letters / words) * 100);
-    int S = round((sentences / words) * 100);
+    float L = (letters / words) * 100;
+    float S = (sentences / words) * 100;
     return round(0.0588 * L - 0.296 * S - 15.8);
 }
