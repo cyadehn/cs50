@@ -103,6 +103,17 @@ void print_winner(void)
         }
     }
     // Compare starting candidates until finding a candidate with lower vote count
+    printf("Winner(s): %s", candidates[0].name);
+    if (candidates[0].votes == candidates[1].votes)
+    {
+        int i = 1;
+        while (candidates[i].votes == candidates[i-1].votes)
+        {
+            printf(", %s", candidates[i].name);
+            i++;
+        }
+    }
+    printf("\n");
     return;
 }
 
