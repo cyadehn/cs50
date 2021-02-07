@@ -66,14 +66,40 @@ int main(int argc, string argv[])
 // Update vote totals given a new vote
 bool vote(string name)
 {
-    // TODO
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].name == name)
+        {
+            candidates[i].votes++;
+            return true;
+        }
+    }
     return false;
 }
 
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    // TODO
+    // Sort candidates in descending order
+
+    for (int i = 0; i < candidate_count; i++)
+    {
+        candidate current = candidates[i];
+        int swapIndex = i;
+        for (int n = i; n < candidate_count; n++)
+        {
+            if (candidates[n].votes < current.votes)
+            {
+                swapIndex = n;
+            }
+        }
+        if (swapIndex != i)
+        {
+            candidates[i] = candidates[swapIndex];
+            candidates[swapIndex] = current;
+        }
+    }
+    // Compare starting candidates until a candidate with lower
     return;
 }
 
