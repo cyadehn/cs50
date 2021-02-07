@@ -81,25 +81,28 @@ bool vote(string name)
 void print_winner(void)
 {
     // Sort candidates in descending order
-
+    // Loop to sort for each candidate in array
     for (int i = 0; i < candidate_count; i++)
     {
+        // Store current candidate for future swap
         candidate current = candidates[i];
         int swapIndex = i;
+        // Loop through each candidate after the ith item to check for larger values
         for (int n = i; n < candidate_count; n++)
         {
-            if (candidates[n].votes < current.votes)
+            if (candidates[n].votes > current.votes)
             {
                 swapIndex = n;
             }
         }
+        // Swap ith and smallest items, if not the same ith item
         if (swapIndex != i)
         {
             candidates[i] = candidates[swapIndex];
             candidates[swapIndex] = current;
         }
     }
-    // Compare starting candidates until a candidate with lower
+    // Compare starting candidates until finding a candidate with lower vote count
     return;
 }
 
