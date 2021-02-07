@@ -1,0 +1,75 @@
+sort1 uses: bubble sort
+
+How do you know?: In each set of data, this is the slowest except for the sorted data. The bubble sort algorithm stops after a loop with no swaps--therefore, a sorted data set would stop after 1 loop (n-1 calculations). This would be faster than the omega(n) values of nlog(n) for merge sort and nsq for selection sort. In the random and reversed sets, the bubble sort algorithm will be the slowest, since it not only has a run time of O(n2) but also has to run an extra loop past selection to check for further swaps (selection knows when it ends that it is finished).
+
+sort2 uses: merge sort
+
+How do you know?: Using process of elimination, between merge and selection sort the faster of the two will be the correct choice (given that merge sort's theta nlogn will run faster than selection sort's theta nsq).
+
+sort3 uses: selection sort
+
+How do you know?: Same as above--of the two remaining algorithms, the slower of the two will be using an implementation of selection sort.
+
+sorted5000:
+sort1: .012s, .11s, .009s
+sort2: .012s, .11s, .12s
+sort3: .117s, .33s, .34s
+
+sorted10000:
+1: .023s, .023s, .018s
+2: .020s, .023s, .021s
+3: .160s, .169s, .214s
+
+sorted50000:
+1: 3.050s, 2.783s, 2.975s
+Bubble?
+2: 4.265s, 4.050s, 3.145s, 2.512s, 3.586s
+Merge?
+3: 7.455s, 8.813s, 7.995s
+Selection?
+
+reversed5000:
+1: .093s, .085s
+2: .01s, .013s
+3: .033s, .036s
+
+reversed10000:
+1: .362s, .360s, .356s
+2: .018s, .022s, .082s
+3: .178s, .271s, .225s
+
+reversed50000:
+1: 12.592s, 12.123s, 11.941s
+Bubble?
+2: 3.555s, 2.464s, 3.553s
+Merge?
+3: 7.068s, 8.418s, 7.874s
+Selection?
+
+random5000:
+1: .059s, .059s, .099s,
+2: .010s, .015s, .016s
+3: .032s, .044s, .033s
+
+random10000:
+1: .501s, .456s, .454s
+2: .019s, .020s, .019s
+3: .221s, .161s, .241s,
+
+random50000:
+1: 16.119s, 16.551s, 15.635s
+Bubble?
+2: 2.373s, 2.615s, 2.559s
+Merge?
+3: 9.089s, 7.477s, 9.067s
+Selection?
+
+omega(n):
+Selection sort: n2
+Bubble sort: n
+Merge sort: nlog(n)
+
+O(n):
+Selection sort: n2
+Bubble sort: n2
+Merge sort: nlog(n)
