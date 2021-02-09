@@ -15,3 +15,5 @@ class_files/ex
 .local/
 **/.sqlite_history
 .wget-hsts
+.vscode/launch.json
+.vscode/tasks.json
