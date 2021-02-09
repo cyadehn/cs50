@@ -107,7 +107,7 @@ void print_winner(void)
     if (candidates[0].votes == candidates[1].votes)
     {
         int i = 1;
-        while (candidates[i].votes == candidates[i-1].votes)
+        while (candidates[i].votes == candidates[i - 1].votes)
         {
             printf("%s\n", candidates[i].name);
             i++;
