@@ -128,14 +128,17 @@ int main(int argc, string argv[])
 // Record preference if vote is valid
 bool vote(int voter, int rank, string name)
 {
+    // Loop through candidates for comparison with passed in name
     for (int i = 0; i < candidate_count; i++)
     {
+        // If passed name is in the candidates array, record vote in main preferences array
         if (strcmp(candidates[i].name, name) == 0)
         {
             preferences[voter][rank] = i;
             return true;
         }
     }
+    // If no valid candidate found, return false to end program
     return false;
 }
 
