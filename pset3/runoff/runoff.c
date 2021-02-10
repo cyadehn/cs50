@@ -206,7 +206,11 @@ bool print_winner(void)
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
-    // TODO
+    // Perform linear search for the non-eliminated candidate with the smallest number of votes
+    for (int i = 0; i < candidate_count; i++)
+    {
+
+    }
     return 0;
 }
 
