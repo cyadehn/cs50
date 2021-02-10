@@ -233,9 +233,9 @@ bool is_tie(int min)
     {
         // Check remaining candidates for a match, returning false if a count is different
         if (candidates[i].votes != comparison_count)
-            {
-                return false;
-            }
+        {
+            return false;
+        }
     }
     return true;
 }
