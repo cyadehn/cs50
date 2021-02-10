@@ -226,8 +226,16 @@ int find_min(void)
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    // TODO
-    return false;
+    // Store first candidate's vote count
+    int comparison_count = candidates[0].votes;
+    // Loop through candidates
+    for (int i = 0; i < candidate_count; i++)
+    {
+        // Check remaining candidates for a match, returning false if a count is different
+        if (candidates[i].votes != comparison_count)
+            return false;
+    }
+    return true;
 }
 
 // Eliminate the candidate (or candidates) in last place
