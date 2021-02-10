@@ -1,6 +1,7 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 // Max voters and candidates
 #define MAX_VOTERS 100
@@ -167,7 +168,38 @@ void tabulate(void)
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    // TODO
+    // Sort descending candidates by votes cast
+    // Loop to sort for each candidate in array
+    for (int i = 0; i < candidate_count; i++)
+    {
+        // Store current candidate for future swap
+        candidate current = candidates[i];
+        int swap_index = i;
+        // Loop through each candidate after the ith item to check for larger values
+        for (int n = i; n < candidate_count; n++)
+        {
+            if (candidates[n].votes > current.votes)
+            {
+                swap_index = n;
+            }
+        }
+        // Swap ith and smallest items, if not the same ith item
+        if (swap_index != i)
+        {
+            candidates[i] = candidates[swap_index];
+            candidates[swap_index] = current;
+        }
+    }
+    // Calculate majority vote needed
+    int majority = round(voter_count / 2);
+    // Check first sorted candidate for winning vote
+    if (candidates[0].votes >= majority)
+    {
+        // Print winner's name
+        printf("%s\n", candidates[0].name);
+        return true;
+    }
+    // Exit without a winner to continue runoff
     return false;
 }
 
