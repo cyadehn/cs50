@@ -191,9 +191,9 @@ bool print_winner(void)
         }
     }
     // Calculate majority vote needed
-    int majority = round(voter_count / 2);
+    int majority = voter_count / 2;
     // Check first sorted candidate for winning vote
-    if (candidates[0].votes >= majority)
+    if (candidates[0].votes > majority)
     {
         // Print winner's name
         printf("%s\n", candidates[0].name);
