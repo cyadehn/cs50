@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
     while(fread(sample, sizeof(int16_t), 1, input))
     {
         // Write sample to file
+        *sample = *sample * factor;
         fwrite(sample, sizeof(int16_t), 1, output);
     }
     // Free malloc'd sample
