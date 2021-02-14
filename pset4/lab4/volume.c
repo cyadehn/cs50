@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 
     // TODO: Copy header from input file to output file
     // Allocate mem for header, write to output file
-    uint8_t *header[HEADER_SIZE] = malloc(HEADER_SIZE);
+    uint8_t* header = malloc(HEADER_SIZE * sizeof(uint8_t));
     // Check if pointer is null
     if (header == NULL)
     {
