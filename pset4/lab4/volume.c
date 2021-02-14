@@ -50,7 +50,12 @@ int main(int argc, char *argv[])
         free(header);
     }
     // TODO: Read samples from input file and write updated data to output file
-
+    // Read stream while not at end of file
+    int16_t *sample;
+    while(fread(input, sizeof(int16_t), 1, sample))
+    {
+        fwrite(sample, sizeof(int16_t), 1, output);
+    }
     // Close files
     fclose(input);
     fclose(output);
