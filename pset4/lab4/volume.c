@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
     // Read samples one at a time
     while(fread(sample, sizeof(int16_t), 1, input))
     {
-        // Write sample to file
+        // Multiple by factor + write sample to file
         *sample = *sample * factor;
         fwrite(sample, sizeof(int16_t), 1, output);
     }
