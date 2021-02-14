@@ -50,12 +50,15 @@ int main(int argc, char *argv[])
         free(header);
     }
     // TODO: Read samples from input file and write updated data to output file
-    // Read stream while not at end of file
+    // Allocate memory for samples
     int16_t *sample = malloc(sizeof(int16_t));
+    // Read samples one at a time
     while(fread(sample, sizeof(int16_t), 1, input))
     {
+        // Write sample to file
         fwrite(sample, sizeof(int16_t), 1, output);
     }
+    // Free malloc'd sample
     free(sample);
     // Close files
     fclose(input);
