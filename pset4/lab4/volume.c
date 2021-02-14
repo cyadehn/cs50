@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 
     // DONE: Copy header from input file to output file
     // Allocate mem for header
-    uint8_t* header = malloc(HEADER_SIZE * sizeof(uint8_t));
+    uint8_t *header = malloc(HEADER_SIZE * sizeof(uint8_t));
     // Check if pointer is null
     if (header == NULL)
     {
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     // Allocate memory for samples
     int16_t *sample = malloc(sizeof(int16_t));
     // Read samples one at a time
-    while(fread(sample, sizeof(int16_t), 1, input))
+    while (fread(sample, sizeof(int16_t), 1, input))
     {
         // Multiple by factor + write sample to file
         *sample = *sample * factor;
