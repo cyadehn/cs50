@@ -1,0 +1,21 @@
+./runoff Mark Mindy Madison
+5
+Mark
+Madison .
+Mindy
+
+Mindy .
+Mark
+Madison
+
+Mindy .
+Madison
+Mark
+
+Madison .
+Mindy
+Mark
+
+Madison .
+Mindy
+Mark
