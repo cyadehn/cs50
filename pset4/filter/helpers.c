@@ -1,4 +1,5 @@
 #include "helpers.h"
+#include "math.h"
 
 RGBTRIPLE greyscalePx();
 
@@ -49,8 +50,9 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 RGBTRIPLE greyscalePx(RGBTRIPLE orig)
 {
     RGBTRIPLE out;
-    out.rgbtBlue = (orig.rgbtBlue + orig.rgbtGreen + orig.rgbtRed) / 3;
-    out.rgbtGreen = (orig.rgbtBlue + orig.rgbtGreen + orig.rgbtRed) / 3;
-    out.rgbtRed = (orig.rgbtBlue + orig.rgbtGreen + orig.rgbtRed) / 3;
+    BYTE avg = round((orig.rgbtBlue + orig.rgbtGreen + orig.rgbtRed) / 3)
+    out.rgbtBlue = avg;
+    out.rgbtGreen = avg;
+    out.rgbtRed = avg;
     return out;
 }
