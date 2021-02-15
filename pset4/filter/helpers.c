@@ -50,7 +50,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 RGBTRIPLE greyscalePx(RGBTRIPLE orig)
 {
     RGBTRIPLE out;
-    BYTE avg = round((orig.rgbtBlue + orig.rgbtGreen + orig.rgbtRed) / 3)
+    BYTE avg = round((orig.rgbtBlue + orig.rgbtGreen + orig.rgbtRed) / 3);
     out.rgbtBlue = avg;
     out.rgbtGreen = avg;
     out.rgbtRed = avg;
