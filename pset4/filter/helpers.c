@@ -1,3 +1,4 @@
+#include "stdio.h"
 #include "helpers.h"
 #include "math.h"
 
@@ -50,7 +51,8 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 RGBTRIPLE greyscalePx(RGBTRIPLE orig)
 {
     RGBTRIPLE out;
-    BYTE avg = rint((orig.rgbtBlue + orig.rgbtGreen + orig.rgbtRed) / 3);
+    BYTE avg = round((orig.rgbtBlue + orig.rgbtGreen + orig.rgbtRed) / 3.0);
+    printf("Avg of (%hhu, %hhu, %hhu): %hhu\n", orig.rgbtBlue, orig.rgbtGreen, orig.rgbtRed, avg);
     out.rgbtBlue = avg;
     out.rgbtGreen = avg;
     out.rgbtRed = avg;
