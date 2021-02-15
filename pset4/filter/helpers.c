@@ -51,8 +51,9 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 RGBTRIPLE greyscalePx(RGBTRIPLE orig)
 {
     RGBTRIPLE out;
+    // Average and round RGB values
     BYTE avg = round((orig.rgbtBlue + orig.rgbtGreen + orig.rgbtRed) / 3.0);
-    printf("Avg of (%hhu, %hhu, %hhu): %hhu\n", orig.rgbtBlue, orig.rgbtGreen, orig.rgbtRed, avg);
+    // Assign avg to output triple value
     out.rgbtBlue = avg;
     out.rgbtGreen = avg;
     out.rgbtRed = avg;
