@@ -34,8 +34,8 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
         for (int p = 0, n = round(width / 2.0); p < n; p++)
         {
             swap = image[r][p];
-            image[r][p] = image[r][width-p];
-            image[r][width-p] = swap;
+            image[r][p] = image[r][width-(p+1)];
+            image[r][width-(p+1)] = swap;
         }
     }
     return;
