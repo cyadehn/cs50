@@ -1,10 +1,23 @@
 #include "helpers.h"
 
+RGBTRIPLE greyscalePx();
+
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
-    // Iterate over rows
-    // Average BRG values + assign to each byte
+    RGBTRIPLE in, out;
+    BYTE avg = 0;
+    // Iterate over rows + pixels
+    for (int r = 0; r < height; r++)
+    {
+        for (int p = 0; p < width; p++)
+        {
+            // Average BRG values + assign to each byte
+            in = image[r][p];
+            out = greyscalePx(in);
+            image[r][p] = out;
+        }
+    }
     return;
 }
 
@@ -31,4 +44,13 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     // Iterate over row pixels + apply image processing matrices
     // Calculate Sobel value and assign to output stream
     return;
+}
+
+RGBTRIPLE greyscalePx(RGBTRIPLE orig)
+{
+    RGBTRIPLE out;
+    out.rgbtBlue = (orig.rgbtBlue + orig.rgbtGreen + orig.rgbtRed) / 3;
+    out.rgbtGreen = (orig.rgbtBlue + orig.rgbtGreen + orig.rgbtRed) / 3;
+    out.rgbtRed = (orig.rgbtBlue + orig.rgbtGreen + orig.rgbtRed) / 3;
+    return out;
 }
