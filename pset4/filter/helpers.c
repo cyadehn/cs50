@@ -45,7 +45,16 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
     // Iterate over image rows
-    // Iterate over row pixels + average with surrounding values
+    for (int r = 0; r < height; r++)
+    {
+        // Iterate over row pixels + average with surrounding values
+        for (int px = 0; px < height; px++)
+        {
+            // Iterate over -1 to 1 x & y indexes
+            // Check if index is outside of height/width range for image size
+            // Average surrounding values + assign to current value
+        }
+    }
     return;
 }
 
