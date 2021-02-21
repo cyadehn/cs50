@@ -48,13 +48,31 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     for (int r = 0; r < height; r++)
     {
         // Iterate over row pixels + average with surrounding values
-        for (int px = 0; px < height; px++)
+        for (int px = 0; px < width; px++)
         {
+            int sum = 0;
+            int avg = 0;
             // Iterate over -1 to 1 x & y indexes
-            // Check if index is outside of height/width range for image size
-            // Average surrounding values + assign to current value
+            for (int y = -1; y <= 1; y++)
+            {
+                // Check if index is outside of image height range
+                if (r + y < 0 || r + y >= height)
+                {
+                    continue;
+                }
+                for (int x = -1; x <= 1; x++)
+                {
+                    // Check if index is outside of image width range
+                    if (px + x < 0 || px + x >= width)
+                    {
+                        continue;
+                    }
+                }
+            }
+            
         }
     }
+    // Average surrounding values + assign to current value
     return;
 }
 
