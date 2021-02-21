@@ -50,7 +50,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         // Iterate over row pixels + average with surrounding values
         for (int px = 0; px < width; px++)
         {
-            int sum = 0;
+            int rsum = 0;
+            int gsum = 0;
+            int bsum = 0;
             int avg = 0;
             // Iterate over -1 to 1 x & y indexes
             for (int y = -1; y <= 1; y++)
@@ -67,12 +69,22 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     {
                         continue;
                     }
+                    else
+                    {
+                        // Increment avg, add rgb values to aggregate sums
+                        avg++;
+                        rsum += (int)image[r + y][px + x].rgbtRed;
+                        gsum += (int)image[r + y][px + x].rgbtGreen;
+                        bsum += (int)image[r + y][px + x].rgbtBlue;
+                    }
                 }
             }
-            
+            // Average surrounding values + assign to current value
+            image[r][px].rgbtBlue = (BYTE)bsum / avg;
+            image[r][px].rgbtGreen = (BYTE)gsum / avg;
+            image[r][px].rgbtRed = (BYTE)rsum / avg;
         }
     }
-    // Average surrounding values + assign to current value
     return;
 }
 
