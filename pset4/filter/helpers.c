@@ -80,9 +80,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 }
             }
             // Average surrounding values + assign to current value
-            image[r][px].rgbtBlue = (BYTE)bsum / avg;
-            image[r][px].rgbtGreen = (BYTE)gsum / avg;
-            image[r][px].rgbtRed = (BYTE)rsum / avg;
+            image[r][px].rgbtBlue = bsum / avg;
+            image[r][px].rgbtGreen = gsum / avg;
+            image[r][px].rgbtRed = rsum / avg;
         }
     }
     return;
